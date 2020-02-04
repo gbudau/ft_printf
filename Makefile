@@ -3,7 +3,6 @@ CC = gcc
 CFLAGS = -Wall -Werror -Wextra
 LIB_DIR = libft
 LIB = libft.a
-AR_FLAGS = rcs
 DEPS = ft_printf.h
 OBJ = ft_printf.o
 
@@ -16,7 +15,7 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	make -C $(LIB_DIR) bonus
 	cp $(LIB_DIR)/$(LIB) $(NAME)
-	$(AR) $(AR_FLAGS) $(NAME) $^
+	ar rcs $(NAME) $^
 
 .PHONY: clean
 clean:
@@ -33,4 +32,4 @@ re: fclean all
 
 .PHONY: test
 test: re
-	$(CC) $(CFLAGS) $@.c -L. -lftprintf -o $@ && ./$@
+	$(CC) $(CFLAGS) $@.c -L. -lftprintf -o $@ && ./$@ | cat -e
