@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/09 01:29:47 by gbudau            #+#    #+#             */
+/*   Updated: 2020/02/09 01:29:48 by gbudau           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 # include <unistd.h>
@@ -5,7 +17,6 @@
 # include <stdarg.h>
 # include <stdio.h>
 # include "libft/libft.h"
-# define ALLSIGNS "-0.*123456789cspdioxX%"
 # define F_ZERO 1
 # define F_MINUS 2
 
