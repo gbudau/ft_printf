@@ -6,7 +6,7 @@
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/09 01:29:47 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/11 07:27:24 by gbudau           ###   ########.fr       */
+/*   Updated: 2020/02/12 05:01:47 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <stdlib.h>
 # include <stdarg.h>
 # include <stdio.h>
-# include "libft/libft.h"
+# include "../libft/libft.h"
 # define F_ZERO 1
 # define F_MINUS 2
 

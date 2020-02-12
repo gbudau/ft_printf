@@ -6,11 +6,11 @@
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/09 01:29:41 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/12 03:50:06 by gbudau           ###   ########.fr       */
+/*   Updated: 2020/02/12 05:00:46 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../include/ft_printf.h"
 
 int	get_flags(const char *str, t_pf *opt)
 {
