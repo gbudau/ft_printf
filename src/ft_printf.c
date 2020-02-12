@@ -6,7 +6,7 @@
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/09 01:29:41 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/12 05:00:46 by gbudau           ###   ########.fr       */
+/*   Updated: 2020/02/12 06:54:46 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,7 @@ int	get_optionals(const char *str, va_list *ap, t_pf *opt)
 	int		i;
 
 	*opt = zero;
-	i = 0;
-	i += get_flags(str, opt);
+	i = get_flags(str, opt);
 	i += get_width(&str[i], ap, opt);	
 	i += get_prec(&str[i], ap, opt);
 	return (i);
@@ -112,15 +111,15 @@ int	print_char(va_list *ap, t_pf *opt)
 	c = va_arg(*ap, int);
 	if (opt->flags & F_MINUS)
 	{
-		out = write(1, &c, 1);
-		out += put_space(opt->width - 1);
+		ft_putchar(c);
+		out = put_space(opt->width - 1);
 	}
 	else
 	{
 		out = put_space(opt->width - 1);
-		out += write(1, &c, 1);
+		ft_putchar(c);
 	}
-	return (out);
+	return (out + 1);
 }
 
 int	print_percent(va_list *ap, t_pf *opt)

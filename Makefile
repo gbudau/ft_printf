@@ -6,11 +6,11 @@
 #    By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/09 01:29:55 by gbudau            #+#    #+#              #
-#    Updated: 2020/02/12 06:11:05 by gbudau           ###   ########.fr        #
+#    Updated: 2020/02/12 07:11:55 by gbudau           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-MAKEFLAGS += --silent
+#MAKEFLAGS += --silent
 
 I_DIR = include
 SRC_DIR = src
@@ -45,7 +45,7 @@ $(O_DIR):
 	mkdir $(O_DIR)
 
 $(NAME): $(OBJ)
-	make -C $(L_DIR) bonus
+	make -C $(L_DIR)
 	cp $(L_DIR)/$(LIB) $(NAME)
 	$(AR) $(NAME) $^
 

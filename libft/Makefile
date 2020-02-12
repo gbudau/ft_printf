@@ -6,7 +6,7 @@
 #    By: gbudau <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/11 00:42:18 by gbudau            #+#    #+#              #
-#    Updated: 2020/02/10 21:41:52 by gbudau           ###   ########.fr        #
+#    Updated: 2020/02/12 06:39:56 by gbudau           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,12 +35,8 @@ all: $(NAME)
 %.o: %.c $(DEPS)
 	$(COMPILE.c) $< $(OUTPUT_OPTION)
 
-$(NAME): $(OBJ) $(EXTRA) 
+$(NAME): $(OBJ) $(EXTRA) $(BON_OBJ) 
 	$(AR) $@ $^
-
-.PHONY: bonus
-bonus: $(BON_OBJ) all 
-	$(AR) $(NAME) $(BON_OBJ)
 
 .PHONY: clean
 clean:
@@ -52,6 +48,3 @@ fclean: clean
 
 .PHONY: re
 re: fclean all
-
-.PHONY: rebonus
-rebonus: fclean all bonus
