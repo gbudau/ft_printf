@@ -6,7 +6,7 @@
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/09 01:29:41 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/10 09:55:48 by gbudau           ###   ########.fr       */
+/*   Updated: 2020/02/12 03:50:06 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,28 +52,26 @@ int	get_width(const char *str, va_list *ap, t_pf *opt)
 	return (i);
 }
 
-int	get_precision(const char *str,va_list *ap, t_pf *opt)
+int	get_prec(const char *str,va_list *ap, t_pf *opt)
 {
 	int	i;
 	
 	i = 0;
-	opt->precision = -1;
-	if (str[i] == '.')
+	opt->prec = -1;
+	if (str[i++] != '.')
+		return (0);
+	opt->prec = 0;
+	if (str[i] == '*')
 	{
+		opt->prec = va_arg(*ap, int);
 		i++;
-		opt->precision = 0;
-		if (str[i] == '*')
+	}
+	else
+	{
+		while (ft_isdigit(str[i]))
 		{
-			opt->precision = va_arg(*ap, int);
+			opt->prec = opt->prec * 10 + str[i] - '0';
 			i++;
-		}
-		else
-		{
-			while (ft_isdigit(str[i]))
-			{
-				opt->precision = opt->precision * 10 + str[i] - '0';
-				i++;
-			}
 		}
 	}
 	return (i);
@@ -88,7 +86,20 @@ int	get_optionals(const char *str, va_list *ap, t_pf *opt)
 	i = 0;
 	i += get_flags(str, opt);
 	i += get_width(&str[i], ap, opt);	
-	i += get_precision(&str[i], ap, opt);
+	i += get_prec(&str[i], ap, opt);
+	return (i);
+}
+
+int	put_space(int len)
+{
+	int i;
+	
+	i = 0;
+	while (i < len)
+	{
+		write(1, " ", 1);
+		i++;
+	}
 	return (i);
 }
 
@@ -97,19 +108,16 @@ int	print_char(va_list *ap, t_pf *opt)
 	int	out;
 	char	c;
 
-	out = 0;
 	*opt = *opt;
 	c = va_arg(*ap, int);
 	if (opt->flags & F_MINUS)
 	{
-		out += write(1, &c, 1);
-		while (--opt->width > 0)
-			out += write(1, " ", 1);
+		out = write(1, &c, 1);
+		out += put_space(opt->width - 1);
 	}
 	else
 	{
-		while (opt->width-- > 1)
-			out += write(1, " ", 1);
+		out = put_space(opt->width - 1);
 		out += write(1, &c, 1);
 	}
 	return (out);
@@ -119,21 +127,20 @@ int	print_percent(va_list *ap, t_pf *opt)
 {
 	int	out;
 
-	out = 0;
 	*opt = *opt;
 	(void)*ap;
-	out += write(1, "%", 1);
+	out = write(1, "%", 1);
 	return (out);
 }
 
-int	put_space(int	len)
+int	put_zero(int len)
 {
 	int i;
-	
+
 	i = 0;
 	while (i < len)
 	{
-		write(1, " ", 1);
+		write(1, "0", 1);
 		i++;
 	}
 	return (i);
@@ -147,8 +154,8 @@ int	print_string(va_list *ap, t_pf *opt)
 
 	str = va_arg(*ap, char *);
 	len = ft_strlen(str);
-	if (opt->precision >= 0 && opt->precision < len)
-		len = opt->precision;
+	if (opt->prec >= 0 && opt->prec < len)
+		len = opt->prec;
 	if (opt->width > len)
 	{
 		if (opt->flags & F_MINUS)
@@ -167,16 +174,99 @@ int	print_string(va_list *ap, t_pf *opt)
 	return (out);
 }
 
+int	put_zero_or_space(t_pf *opt, int len)
+{
+	if (opt->flags & F_ZERO)
+		len = put_zero(len);
+	else
+		len = put_space(len);
+	return (len);
+}
+
+void	put_uint(int nb)
+{
+	unsigned int n;
+
+	if (nb < 0)
+		n = nb * -1;
+	else
+		n = nb;
+	if (n < 10)
+		ft_putchar(n + '0');
+	else
+	{
+		put_uint(n / 10);
+		putchar(n % 10 + '0');
+	}
+}
+
 int	print_decimal(va_list *ap, t_pf *opt)
 {
-	int	nb;
-	int	len;
+	int		nb;
+	int		out;
+	int		len;
 
-	*opt = *opt;
 	nb = va_arg(*ap, int);
 	len = ft_intlen(nb);
-	ft_putnbr(nb);
-	return (len);
+	out = len;
+	if (opt->width < out && opt->prec < out)
+	{
+		ft_putnbr(nb);
+		return (out);
+	}
+	if (opt->flags & F_MINUS)
+	{
+		if (opt->prec >= 0)
+		{
+			if (nb < 0 && len <= opt->prec)
+			{
+				write(1, "-", 1);
+				out += put_zero(opt->prec - (len - 1));
+				put_uint(nb);
+				if (opt->width > opt->prec + 1)
+					out += put_space(opt->width - (opt->prec - (len - 1)) - len);
+			}
+			else
+			{
+				opt->prec = opt->prec < len ? len : opt->prec;
+				out += put_zero(opt->prec - len);
+				ft_putnbr(nb);
+				out += put_space(opt->width - opt->prec);
+			}
+		}
+		else
+		{
+			ft_putnbr(nb);
+			out += put_space(opt->width - out);
+		}
+	}
+	else
+	{
+		if (opt->prec >= 0)
+		{
+			if (nb < 0 && len <= opt->prec)
+			{
+				if (opt->width > opt->prec + 1)
+					out += put_space(opt->width - (opt->prec - (len - 1)) - len);
+				write(1, "-", 1);
+				out += put_zero(opt->prec - (len - 1));
+				put_uint(nb);
+			}
+			else
+			{
+				opt->prec = opt->prec < len ? len : opt->prec;
+				out += put_space(opt->width - opt->prec);
+				out += put_zero(opt->prec - len);
+				ft_putnbr(nb);
+			}
+		}
+		else
+		{
+			out += put_zero_or_space(opt, opt->width - len);
+			ft_putnbr(nb);
+		}
+	}
+	return (out);
 }
 
 int	do_conversion(int c, va_list *ap, t_pf *opt)

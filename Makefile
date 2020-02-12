@@ -6,7 +6,7 @@
 #    By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/09 01:29:55 by gbudau            #+#    #+#              #
-#    Updated: 2020/02/10 09:07:58 by gbudau           ###   ########.fr        #
+#    Updated: 2020/02/11 01:51:37 by gbudau           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,4 +45,4 @@ re: fclean all
 
 .PHONY: test
 test: re
-	$(CC) $(CFLAGS) $@.c -L. -lftprintf -o $@ && ./$@ | cat -e
+	$(CC) $(CFLAGS) $@.c -L. -lftprintf -o $@ -g && ./$@ | cat -e

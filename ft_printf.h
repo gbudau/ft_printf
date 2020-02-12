@@ -6,7 +6,7 @@
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/09 01:29:47 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/09 01:29:48 by gbudau           ###   ########.fr       */
+/*   Updated: 2020/02/11 07:27:24 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 typedef struct s_pf
 {
 	unsigned int	flags;
-	int		precision;
+	int		prec;
 	int		width;
 }	t_pf;
 

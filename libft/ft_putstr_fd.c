@@ -6,7 +6,7 @@
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/24 02:02:37 by gbudau            #+#    #+#             */
-/*   Updated: 2019/11/24 02:15:54 by gbudau           ###   ########.fr       */
+/*   Updated: 2020/02/11 06:13:18 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,5 @@
 
 void	ft_putstr_fd(char *s, int fd)
 {
-	if (s == NULL)
-		return ;
-	while (*s != '\0')
-		ft_putchar_fd(*s++, fd);
+	write(fd, s, ft_strlen(s));
 }
