@@ -6,11 +6,11 @@
 #    By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/09 01:29:55 by gbudau            #+#    #+#              #
-#    Updated: 2020/02/12 07:11:55 by gbudau           ###   ########.fr        #
+#    Updated: 2020/02/13 05:59:22 by gbudau           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-#MAKEFLAGS += --silent
+MAKEFLAGS += --silent
 
 I_DIR = include
 SRC_DIR = src
@@ -26,7 +26,7 @@ RMF = rm -rf
 NAME = libftprintf.a
 LIB = libft.a
 
-_OBJ = ft_printf.o
+_OBJ = ft_printf.o pf_string.o pf_char.o pf_decimal.o pf_utils.o pf_get_optionals.o
 OBJ := $(patsubst %, $(O_DIR)/%, $(_OBJ))
 
 
