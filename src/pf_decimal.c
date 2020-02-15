@@ -6,13 +6,13 @@
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 05:38:55 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/13 09:05:45 by gbudau           ###   ########.fr       */
+/*   Updated: 2020/02/14 06:43:02 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-static void	pf_put_unbr(int nb)
+static void	put_unsigned(int nb)
 {
 	unsigned int n;
 
@@ -24,87 +24,70 @@ static void	pf_put_unbr(int nb)
 		ft_putchar(n + '0');
 	else
 	{
-		pf_put_unbr(n / 10);
+		put_unsigned(n / 10);
 		putchar(n % 10 + '0');
 	}
 }
 
-/*
-** This funcion deals with the case when the number is negative
-** and precision or '0' flag are ON so we have to print
-** the '-' first then zero's then the number
-*/
-
-static int	pf_put_minus_zero_unbr(int nb, int len)
+static int	print_minus_first(int nb, int len)
 {
 	write(1, "-", 1);
 	pf_put_zero(len);
-	pf_put_unbr(nb);
+	put_unsigned(nb);
 	return (len);
 }
 
-static int	pf_decimal_left(int nb, int len, t_pf *opt)
+static int	print_left(int nb, int len, int out, t_pf *opt)
 {
-	int out;
-
-	out = len;
-	if (opt->prec >= 0)
-	{
-		if (nb < 0 && len <= opt->prec)
-		{
-			out += pf_put_minus_zero_unbr(nb, opt->prec - (len - 1));
-			if (opt->width > opt->prec + 1)
-				out += pf_put_space(opt->width - 
-						(opt->prec - (len - 1)) - len);
-		}
-		else
-		{
-			opt->prec = opt->prec < len ? len : opt->prec;
-			out += pf_put_zero(opt->prec - len);
-			ft_putnbr(nb);
-			out += pf_put_space(opt->width - opt->prec);
-		}
-	}
-	else
+	if (opt->prec < 0)
 	{
 		ft_putnbr(nb);
 		out += pf_put_space(opt->width - out);
+		return (out);
 	}
-	return (out - len);
-}
-
-static int	pf_decimal_right(int nb, int len, t_pf *opt)
-{
-	int out;
-
-	out = len;
-	if (opt->prec >= 0)
+	if (nb < 0 && len <= opt->prec)
 	{
-		if (nb < 0 && len <= opt->prec)
-		{
-			if (opt->width > opt->prec + 1)
-				out += pf_put_space(opt->width - (opt->prec - (len - 1)) - len);
-			out += pf_put_minus_zero_unbr(nb, opt->prec - (len - 1));
-		}
-		else
-		{
-			opt->prec = opt->prec < len ? len : opt->prec;
-			out += pf_put_space(opt->width - opt->prec);
-			out += pf_put_zero(opt->prec - len);
-			ft_putnbr(nb);
-		}
+		out += print_minus_first(nb, opt->prec - (len - 1));
+		if (opt->width > opt->prec + 1)
+			out += pf_put_space(opt->width - 
+					(opt->prec - (len - 1)) - len);
 	}
 	else
 	{
+		opt->prec = opt->prec < len ? len : opt->prec;
+		out += pf_put_zero(opt->prec - len);
+		ft_putnbr(nb);
+		out += pf_put_space(opt->width - opt->prec);
+	}
+	return (out);
+}
+
+static int	print_right(int nb, int len, int out, t_pf *opt)
+{
+	if (opt->prec < 0)
+	{
 		if (nb < 0 && (opt->flags & F_ZERO) && opt->width > len)
-			out += pf_put_minus_zero_unbr(nb, opt->width - len);
+			out += print_minus_first(nb, opt->width - len);
 		else
 		{
 			out += pf_put_zero_or_space(opt, opt->width - len);
 			ft_putnbr(nb);
 		}
+		return (out);
 	}
-	return (out - len);
+	if (nb < 0 && len <= opt->prec)
+	{
+		if (opt->width > opt->prec + 1)
+			out += pf_put_space(opt->width - 
+					(opt->prec - (len - 1)) - len);
+		out += print_minus_first(nb, opt->prec - (len - 1));
+		return (out);
+	}
+	opt->prec = opt->prec < len ? len : opt->prec;
+	out += pf_put_space(opt->width - opt->prec);
+	out += pf_put_zero(opt->prec - len);
+	ft_putnbr(nb);
+	return (out);
 }
 
 int		pf_decimal(va_list *ap, t_pf *opt)
@@ -124,8 +107,8 @@ int		pf_decimal(va_list *ap, t_pf *opt)
 		return (out);
 	}
 	if (opt->flags & F_MINUS)
-		out += pf_decimal_left(nb, len, opt);
+		out = print_left(nb, len, out, opt);
 	else
-		out += pf_decimal_right(nb, len, opt);
+		out = print_right(nb, len, out, opt);
 	return (out);
 }

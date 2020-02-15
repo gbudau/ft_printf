@@ -6,7 +6,7 @@
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 02:38:18 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/13 07:21:04 by gbudau           ###   ########.fr       */
+/*   Updated: 2020/02/14 07:42:50 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	pf_char(va_list *ap, t_pf *opt)
 {
-		int		out;
+	int		out;
 	unsigned char	c;
 
 	c = va_arg(*ap, int);

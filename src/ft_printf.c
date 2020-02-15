@@ -6,7 +6,7 @@
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/09 01:29:41 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/13 06:02:19 by gbudau           ###   ########.fr       */
+/*   Updated: 2020/02/15 02:56:28 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ static int	pf_do_conversion(int c, va_list *ap, t_pf *opt)
 {
 	int			out;
 	int			i;
-	static int		(*fptr[4])(va_list *, t_pf *) = 
-	{pf_char, pf_string, pf_decimal, pf_decimal};
-	static const char	conversions[6] = 
-	{'c', 's', 'd', 'i','\0'};
+	static int		(*fptr[6])(va_list *, t_pf *) = 
+	{pf_char, pf_string, pf_decimal, pf_decimal, pf_hex, pf_hex_upper};
+	static const char	conversions[7] = 
+	{'c', 's', 'd', 'i', 'x', 'X', '\0'};
 
 	if (c == '%')
 		return (write(1, &c, 1));

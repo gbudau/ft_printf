@@ -6,7 +6,7 @@
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 05:45:49 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/13 05:46:09 by gbudau           ###   ########.fr       */
+/*   Updated: 2020/02/15 02:05:48 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,7 @@ int	pf_put_zero(int len)
 
 int	pf_put_zero_or_space(t_pf *opt, int len)
 {
-	if (opt->flags & F_ZERO)
-		len = pf_put_zero(len);
-	else
-		len = pf_put_space(len);
-	return (len);
+	if (opt->flags & F_ZERO && opt->prec < 0)
+		return (pf_put_zero(len));
+	return (pf_put_space(len));
 }

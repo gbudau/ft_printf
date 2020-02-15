@@ -6,7 +6,7 @@
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/09 01:29:47 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/13 05:58:57 by gbudau           ###   ########.fr       */
+/*   Updated: 2020/02/15 02:54:37 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ typedef struct s_pf
 int	ft_printf(const char *fmt, ...);
 int	pf_string(va_list *ap, t_pf *opt);
 int	pf_decimal(va_list *ap, t_pf *opt);
+int	pf_hex(va_list *ap, t_pf *out);
+int	pf_hex_upper(va_list *ap, t_pf *s);
 int	pf_char(va_list *ap, t_pf *opt);
 int	pf_get_optionals(const char *str, va_list *ap, t_pf *opt);
 int	pf_put_zero(int len);

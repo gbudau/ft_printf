@@ -6,7 +6,7 @@
 #    By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/09 01:29:55 by gbudau            #+#    #+#              #
-#    Updated: 2020/02/13 05:59:22 by gbudau           ###   ########.fr        #
+#    Updated: 2020/02/15 02:55:19 by gbudau           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,8 @@ RMF = rm -rf
 NAME = libftprintf.a
 LIB = libft.a
 
-_OBJ = ft_printf.o pf_string.o pf_char.o pf_decimal.o pf_utils.o pf_get_optionals.o
+_OBJ = ft_printf.o pf_string.o pf_char.o pf_decimal.o pf_utils.o pf_get_optionals.o \
+       pf_hex.o pf_hex_upper.o
 OBJ := $(patsubst %, $(O_DIR)/%, $(_OBJ))
 
 
