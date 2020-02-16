@@ -6,7 +6,7 @@
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 07:32:19 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/15 04:19:43 by gbudau           ###   ########.fr       */
+/*   Updated: 2020/02/16 08:28:00 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,10 @@ static void	swap_str(char *x, char *y)
 	*y = t;
 }
 
-static char	*rev_str(char *str, int i, int j)
+static void	rev_str(char *str, int i, int j)
 {
 	while (i < j)
 		swap_str(&str[i++], &str[j--]);
-	return (str);
 }
 
 static int	put_hex(unsigned int n)
@@ -68,29 +67,29 @@ static int	hex_len(unsigned int n)
 	return (i);
 }
 
-int		pf_hex(va_list *ap, t_pf *s)
+int		pf_hex(va_list *ap, t_pf_list *l)
 {
 	unsigned int	n;
 	int		len;
 	int		out;
 
-	n = va_arg(*ap, unsigned int);
+	n = va_arg(*ap, int);
+	if (l->prec == 0 && n == 0)
+		return (pf_put_space(l->width));
 	len = hex_len(n);
-	if (s->prec == 0 && n == 0)
-		return (pf_put_space(s->width - len + 1));
-	if (s->width < len && s->prec < len)
+	if (l->width < len && l->prec < len)
 		return (put_hex(n));
-	if (s->flags & F_MINUS)
+	if (l->flags & F_MINUS)
 	{
-		out = pf_put_zero(s->prec - len);
+		out = pf_put_zero(l->prec - len);
 		out += put_hex(n);
-		out += pf_put_space(s->width - (s->prec > len ? s->prec : len));
+		out += pf_put_space(l->width - (l->prec > len ? l->prec : len));
 	}
 	else
 	{
-		out = pf_put_zero_or_space(s, s->width - 
-				(s->prec > len ? s->prec : len));
-		out += pf_put_zero(s->prec - len);
+		out = pf_put_zero_or_space(l, l->width - 
+				(l->prec > len ? l->prec : len));
+		out += pf_put_zero(l->prec - len);
 		out += put_hex(n);
 	}
 	return (out);

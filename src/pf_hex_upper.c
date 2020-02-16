@@ -6,7 +6,7 @@
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 02:51:40 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/15 03:49:46 by gbudau           ###   ########.fr       */
+/*   Updated: 2020/02/16 08:28:43 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,29 +67,29 @@ static int	hex_len(unsigned int n)
 	return (i);
 }
 
-int		pf_hex_upper(va_list *ap, t_pf *s)
+int		pf_hex_upper(va_list *ap, t_pf_list *l)
 {
 	unsigned int	n;
 	int		len;
 	int		out;
 
-	n = va_arg(*ap, unsigned int);
+	n = va_arg(*ap, int);
+	if (l->prec == 0 && n == 0)
+		return (pf_put_space(l->width));
 	len = hex_len(n);
-	if (s->prec == 0 && n == 0)
-		return (pf_put_space(s->width - (len - 1)));
-	if (s->prec < len && s->width < len)
+	if (l->prec < len && l->width < len)
 		return (put_hex(n));
-	if (s->flags & F_MINUS)
+	if (l->flags & F_MINUS)
 	{
-		out = pf_put_zero(s->prec - len);
+		out = pf_put_zero(l->prec - len);
 		out += put_hex(n);
-		out += pf_put_space(s->width - (s->prec < len ? len : s->prec));
+		out += pf_put_space(l->width - (l->prec < len ? len : l->prec));
 	}
 	else
 	{
-		out = pf_put_zero_or_space(s, s->width - 
-				(s->prec < len ? len : s->prec));
-		out += pf_put_zero(s->prec - len);
+		out = pf_put_zero_or_space(l, l->width - 
+				(l->prec < len ? len : l->prec));
+		out += pf_put_zero(l->prec - len);
 		out += put_hex(n);
 	}
 	return (out);

@@ -6,7 +6,7 @@
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 05:38:55 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/14 06:43:02 by gbudau           ###   ########.fr       */
+/*   Updated: 2020/02/16 08:25:15 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	print_minus_first(int nb, int len)
 	return (len);
 }
 
-static int	print_left(int nb, int len, int out, t_pf *opt)
+static int	print_left(int nb, int len, int out, t_pf_list *opt)
 {
 	if (opt->prec < 0)
 	{
@@ -62,7 +62,7 @@ static int	print_left(int nb, int len, int out, t_pf *opt)
 	return (out);
 }
 
-static int	print_right(int nb, int len, int out, t_pf *opt)
+static int	print_right(int nb, int len, int out, t_pf_list *opt)
 {
 	if (opt->prec < 0)
 	{
@@ -90,22 +90,22 @@ static int	print_right(int nb, int len, int out, t_pf *opt)
 	return (out);
 }
 
-int		pf_decimal(va_list *ap, t_pf *opt)
+int		pf_decimal(va_list *ap, t_pf_list *opt)
 {
 	int		nb;
 	int		out;
 	int		len;
 
 	nb = va_arg(*ap, int);
-	len = ft_intlen(nb);
-	out = len;
 	if (opt->prec == 0 && nb == 0)
-		return (pf_put_space(opt->width - (len - 1)));
+		return (pf_put_space(opt->width));
+	len = ft_intlen(nb);
 	if (opt->width < len && opt->prec < len)
 	{
 		ft_putnbr(nb);
-		return (out);
+		return (len);
 	}
+	out = len;
 	if (opt->flags & F_MINUS)
 		out = print_left(nb, len, out, opt);
 	else

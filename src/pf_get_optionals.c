@@ -6,13 +6,13 @@
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 05:58:10 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/13 06:00:25 by gbudau           ###   ########.fr       */
+/*   Updated: 2020/02/16 06:55:31 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-static int	pf_get_flags(const char *str, t_pf *opt)
+static int	pf_get_flags(const char *str, t_pf_list *opt)
 {
 	int	i;
 	int	n;
@@ -26,7 +26,7 @@ static int	pf_get_flags(const char *str, t_pf *opt)
 	return (i);
 }
 
-static int	pf_get_width(const char *str, va_list *ap, t_pf *opt)
+static int	pf_get_width(const char *str, va_list *ap, t_pf_list *opt)
 {
 	int i;
 
@@ -52,7 +52,7 @@ static int	pf_get_width(const char *str, va_list *ap, t_pf *opt)
 	return (i);
 }
 
-static int	pf_get_prec(const char *str,va_list *ap, t_pf *opt)
+static int	pf_get_prec(const char *str,va_list *ap, t_pf_list *opt)
 {
 	int	i;
 	
@@ -77,9 +77,9 @@ static int	pf_get_prec(const char *str,va_list *ap, t_pf *opt)
 	return (i);
 }	
 
-int		pf_get_optionals(const char *str, va_list *ap, t_pf *opt)
+int		pf_get_optionals(const char *str, va_list *ap, t_pf_list *opt)
 {
-	static t_pf	zero;
+	static t_pf_list	zero;
 	int		i;
 
 	*opt = zero;
