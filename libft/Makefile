@@ -6,7 +6,7 @@
 #    By: gbudau <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/11 00:42:18 by gbudau            #+#    #+#              #
-#    Updated: 2020/02/12 06:39:56 by gbudau           ###   ########.fr        #
+#    Updated: 2020/02/17 07:30:20 by gbudau           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ OBJ = ft_isalnum.o ft_putchar_fd.o ft_putnbr_fd.o ft_memcmp.o ft_atoi.o ft_strns
       ft_itoa.o ft_strrchr.o ft_strjoin.o ft_isdigit.o ft_strlcat.o ft_putstr_fd.o \
       ft_memcpy.o ft_tolower.o ft_strtrim.o ft_strdup.o ft_memchr.o ft_isprint.o
 EXTRA = ft_strndup.o ft_intlen.o ft_putnbr.o ft_putchar.o ft_strrev.o ft_strchr_index.o \
-	ft_putstr.o
+	ft_putstr.o ft_strnrevn.o
 BON_OBJ = ft_lstclear_bonus.o ft_lstmap_bonus.o ft_lstnew_bonus.o ft_lstsize_bonus.o \
           ft_lstdelone_bonus.o ft_lstadd_front_bonus.o ft_lstiter_bonus.o \
           ft_lstadd_back_bonus.o ft_lstlast_bonus.o 

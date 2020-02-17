@@ -6,27 +6,11 @@
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 02:51:40 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/16 08:28:43 by gbudau           ###   ########.fr       */
+/*   Updated: 2020/02/17 09:01:30 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
-
-static void	char_swap(char *y, char *x)
-{
-	char t;
-
-	t = *x;
-	*x = *y;
-	*y = t;
-}
-
-static char	*rev_str(char *str, int i, int j)
-{
-	while (i < j)
-		char_swap(&str[i++], &str[j--]);
-	return (str);
-}
 
 static int	put_hex(unsigned int n)
 {
@@ -47,8 +31,8 @@ static int	put_hex(unsigned int n)
 	if (i == 0)
 		buffer[i++] = '0';
 	buffer[i] = '\0';
-	rev_str(buffer, 0, i - 1);
-	ft_putstr(buffer);
+	ft_strnrevn(buffer, 0, i - 1);
+	pf_putstrn(buffer, i);
 	return (i);
 }
 
@@ -67,7 +51,7 @@ static int	hex_len(unsigned int n)
 	return (i);
 }
 
-int		pf_hex_upper(va_list *ap, t_pf_list *l)
+int		pf_hex_upper(va_list *ap, t_printf *l)
 {
 	unsigned int	n;
 	int		len;

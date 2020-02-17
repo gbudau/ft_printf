@@ -6,27 +6,12 @@
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 07:32:19 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/16 08:28:00 by gbudau           ###   ########.fr       */
+/*   Updated: 2020/02/17 09:01:27 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 #include <string.h>
-
-static void	swap_str(char *x, char *y)
-{
-	char t;
-
-	t = *x;
-	*x = *y;
-	*y = t;
-}
-
-static void	rev_str(char *str, int i, int j)
-{
-	while (i < j)
-		swap_str(&str[i++], &str[j--]);
-}
 
 static int	put_hex(unsigned int n)
 {
@@ -47,8 +32,8 @@ static int	put_hex(unsigned int n)
 	if (i == 0)
 		buffer[i++] = '0';
 	buffer[i] = '\0';
-	rev_str(buffer, 0, i - 1);
-	ft_putstr(buffer);
+	ft_strnrevn(buffer, 0, i - 1);
+	pf_putstrn(buffer, i);
 	return (i);
 }
 
@@ -67,7 +52,7 @@ static int	hex_len(unsigned int n)
 	return (i);
 }
 
-int		pf_hex(va_list *ap, t_pf_list *l)
+int		pf_hex(va_list *ap, t_printf *l)
 {
 	unsigned int	n;
 	int		len;

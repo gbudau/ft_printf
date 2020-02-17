@@ -6,17 +6,17 @@
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/09 01:29:41 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/16 07:23:22 by gbudau           ###   ########.fr       */
+/*   Updated: 2020/02/17 09:06:18 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-static int	pf_do_conversion(int c, va_list *ap, t_pf_list *opt)
+static int	pf_do_conversion(int c, va_list *ap, t_printf *opt)
 {
 	int			count;
 	int			i;
-	static int		(*fptr[8])(va_list *, t_pf_list *) = 
+	static int		(*fptr[8])(va_list *, t_printf *) = 
 	{pf_char, pf_string, pf_point, pf_decimal, pf_decimal, pf_hex, 
 	pf_hex_upper, pf_uint};
 	static const char	conversions[9] = 
@@ -33,7 +33,7 @@ static int	pf_do_conversion(int c, va_list *ap, t_pf_list *opt)
 static int	pf_parse_fmt(const char *str, va_list *ap)
 {
 	char		*found;
-	t_pf_list	list;
+	t_printf	list;
 	int		count;
 
 	count = 0;

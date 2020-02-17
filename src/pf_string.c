@@ -6,13 +6,13 @@
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 02:08:11 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/16 06:53:08 by gbudau           ###   ########.fr       */
+/*   Updated: 2020/02/17 09:01:09 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-int	pf_string(va_list *ap, t_pf_list *list)
+int	pf_string(va_list *ap, t_printf *list)
 {
 	int	count;
 	int	len;
@@ -25,16 +25,16 @@ int	pf_string(va_list *ap, t_pf_list *list)
 	if (list->prec >= 0 && list->prec < len)
 		len = list->prec;
 	if (list->width < len)
-		return (count = write(1, str, len));
+		return (count = pf_putstrn(str, len));
 	if (list->flags & F_MINUS)
 	{
-		count = write(1, str, len);
+		count = pf_putstrn(str, len);
 		count += pf_put_space(list->width - len);
 	}
 	else
 	{
 		count = pf_put_space(list->width - len);
-		count += write(1, str, len);
+		count += pf_putstrn(str, len);
 	}
 	return (count);
 }

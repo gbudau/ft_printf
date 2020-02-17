@@ -6,7 +6,7 @@
 /*   By: gbudau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/10 21:34:03 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/10 08:57:42 by gbudau           ###   ########.fr       */
+/*   Updated: 2020/02/17 09:12:40 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 # include <unistd.h>
 # include <stdio.h>
 
-typedef struct		s_list
+typedef struct		s_var
 {
 	void			*content;
-	struct s_list	*next;
+	struct s_var	*next;
 }					t_list;
 
 /*
@@ -95,5 +95,6 @@ void				ft_putnbr(int nb);
 void				ft_strrev(char *str);
 void				ft_putstr(const char *str);
 size_t				ft_intlen(int nb);
+void				ft_strnrevn(char *buffer, int start, int end);
 
 #endif

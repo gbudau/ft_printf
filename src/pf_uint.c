@@ -6,23 +6,11 @@
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 04:01:48 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/16 08:23:53 by gbudau           ###   ########.fr       */
+/*   Updated: 2020/02/17 09:01:33 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
-
-static void	str_rev(char *buffer, int start, int end)
-{
-	char	c;
-
-	while (start < end)
-	{
-		c = buffer[start];
-		buffer[start++] = buffer[end];
-		buffer[end--] = c;
-	}
-}
 
 static int	put_uint(unsigned int n)
 {
@@ -40,8 +28,8 @@ static int	put_uint(unsigned int n)
 	if (i == 0)
 		buffer[i++] = '0';
 	buffer[i] = '\0';
-	str_rev(buffer, 0, i - 1);
-	ft_putstr(buffer);
+	ft_strnrevn(buffer, 0, i - 1);
+	pf_putstrn(buffer, i);
 	return (i);
 }
 
@@ -60,7 +48,7 @@ static int	uint_len(unsigned int n)
 	return (i);
 }
 
-int		pf_uint(va_list *ap, t_pf_list *s)
+int		pf_uint(va_list *ap, t_printf *s)
 {
 	unsigned int	n;
 	int		out;

@@ -6,7 +6,7 @@
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 06:29:54 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/16 09:33:46 by gbudau           ###   ########.fr       */
+/*   Updated: 2020/02/17 09:01:18 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,12 @@ static	int	combine_prefix(unsigned long n)
 {
 	int	count;
 
-	count = write(1, "0x", 2);
+	count = pf_putstrn("0x", 2);
 	count += put_long_hex(n);
 	return (count);
 }
 
-int		pf_point(va_list *ap, t_pf_list *l)
+int		pf_point(va_list *ap, t_printf *l)
 {
 	long		n;
 	int		count;
@@ -63,7 +63,7 @@ int		pf_point(va_list *ap, t_pf_list *l)
 	if (n == 0)
 	{
 		n += pf_put_space(l->width - 5);
-		return (n += write(1, "(nil)", 5));
+		return (n += pf_putstrn("(nil)", 5));
 	}
 	len = long_hex_len(n) + 2;
 	if (l->flags & F_MINUS)
