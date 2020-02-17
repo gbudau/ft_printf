@@ -6,7 +6,7 @@
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/09 01:29:41 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/17 09:22:11 by gbudau           ###   ########.fr       */
+/*   Updated: 2020/02/17 12:55:07 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,10 @@ static int	pf_parse_fmt(const char *str, va_list *ap)
 			count += pf_putstrn(str, ft_strlen(str));
 			break;
 		}
-		else
-		{
-			count += pf_putstrn(str, found - str);
-			str = found;
-			str++;
-			str += pf_get_optionals(str, ap, &var);
-			count += pf_do_conversion(*str, ap, &var); 
-		}
+		count += pf_putstrn(str, found - str);
+		str = ++found;
+		str += pf_get_optionals(str, ap, &var);
+		count += pf_do_conversion(*str, ap, &var); 
 		if (*str)
 			str++;
 	}
