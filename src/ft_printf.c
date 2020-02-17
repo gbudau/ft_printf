@@ -6,13 +6,13 @@
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/09 01:29:41 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/17 09:06:18 by gbudau           ###   ########.fr       */
+/*   Updated: 2020/02/17 09:18:13 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-static int	pf_do_conversion(int c, va_list *ap, t_printf *opt)
+static int	pf_do_conversion(int c, va_list *ap, t_printf *var)
 {
 	int			count;
 	int			i;
@@ -26,7 +26,7 @@ static int	pf_do_conversion(int c, va_list *ap, t_printf *opt)
 		return (write(1, &c, 1));
 	count = 0;
 	if ((i = ft_strchr_index(conversions, c)) != -1)
-		count = fptr[i](ap, opt);
+		count = fptr[i](ap, var);
 	return (count);
 }
 
