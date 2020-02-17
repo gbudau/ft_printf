@@ -6,7 +6,7 @@
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 05:38:55 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/17 09:30:35 by gbudau           ###   ########.fr       */
+/*   Updated: 2020/02/17 16:58:00 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	print_number(int n)
 	return (i);
 }
 
-static void	print_unsigned(unsigned n)
+static int	print_unsigned(unsigned n)
 {
 	char		buffer[12];
 	int		i;
@@ -54,73 +54,61 @@ static void	print_unsigned(unsigned n)
 	buffer[i] = '\0';
 	ft_strnrevn(buffer, 0, i - 1);
 	pf_putstrn(buffer, i);
+	return (i);
 }
 
-static int	print_minus_first(int n, int len)
+static int	minus_zero_n(int n, int len)
 {
-	ft_putchar('-');
-	pf_put_zero(len);
-	print_unsigned(-n);
-	return (len);
+	int	i;
+
+	i = pf_putchar('-');
+	i += pf_put_zero(len);
+	i += print_unsigned(-n);
+	return (i);
 }
 
-static int	print_left(int n, int len, int count, t_printf *v)
+static int	print_minus_first(int n, int len, t_printf *v)
 {
-	if (v->prec < 0)
+	int	i;
+
+	if (v->flags & F_MINUS)
 	{
-		print_number(n);
-		count += pf_put_space(v->width - count);
-		return (count);
+		i = minus_zero_n(n, v->prec >= len ? v->prec - len + 1 : 0);
+		i += pf_put_space(v->width - (v->prec >= len ? v->prec + 1 : len));
 	}
-	if (n < 0 && len <= v->prec)
+	else if (v->prec >= 0)
 	{
-		count += print_minus_first(n, v->prec - (len - 1));
-		if (v->width > v->prec + 1)
-			count += pf_put_space(v->width - 
-					(v->prec - (len - 1)) - len);
+		i = pf_put_space(v->width - (v->prec >=  len ? v->prec + 1 : len));
+		i += minus_zero_n(n, v->prec - len + 1);
+	}
+	else
+		i = minus_zero_n(n, v->width - len);
+	return (i);
+}
+
+static int	print_normal(int n, int len, t_printf *v)
+{
+	int	i;
+
+	if (v->flags & F_MINUS)
+	{
+		i = pf_put_zero(v->prec - len);
+		i += n < 0 ? print_number(n) : print_unsigned(n);
+		i += pf_put_space(v->width - (v->prec > len ? v->prec : len));
 	}
 	else
 	{
-		v->prec = v->prec < len ? len : v->prec;
-		count += pf_put_zero(v->prec - len);
-		print_number(n);
-		count += pf_put_space(v->width - v->prec);
+		i = pf_put_zero_or_space(v, v->width - (v->prec > len ? v->prec : len));
+		i += pf_put_zero(v->prec - len);
+		i += n < 0 ? print_number(n) : print_unsigned(n);
 	}
-	return (count);
-}
-
-static int	print_right(int n, int len, int count, t_printf *v)
-{
-	if (v->prec < 0)
-	{
-		if (n < 0 && (v->flags & F_ZERO) && v->width > len)
-			count += print_minus_first(n, v->width - len);
-		else
-		{
-			count += pf_put_zero_or_space(v, v->width - len);
-			print_number(n);
-		}
-		return (count);
-	}
-	if (n < 0 && len <= v->prec)
-	{
-		if (v->width > v->prec + 1)
-			count += pf_put_space(v->width - 
-					(v->prec - (len - 1)) - len);
-		count += print_minus_first(n, v->prec - (len - 1));
-		return (count);
-	}
-	v->prec = v->prec < len ? len : v->prec;
-	count += pf_put_space(v->width - v->prec);
-	count += pf_put_zero(v->prec - len);
-	print_number(n);
-	return (count);
+	return (i);
 }
 
 int		pf_decimal(va_list *ap, t_printf *v)
 {
 	int		n;
-	int		count;
+	int		i;
 	int		len;
 
 	n = va_arg(*ap, int);
@@ -129,10 +117,9 @@ int		pf_decimal(va_list *ap, t_printf *v)
 	len = ft_intlen(n);
 	if (v->width < len && v->prec < len)
 		return (print_number(n));
-	count = len;
-	if (v->flags & F_MINUS)
-		count = print_left(n, len, count, v);
+	if (n < 0 && (v->prec >= len || (v->width > len && v->flags & F_ZERO)))
+		i = print_minus_first(n, len, v);
 	else
-		count = print_right(n, len, count, v);
-	return (count);
+		i = print_normal(n, len, v);
+	return (i);
 }
