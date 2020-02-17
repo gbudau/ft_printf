@@ -6,7 +6,7 @@
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/09 01:29:41 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/17 09:18:13 by gbudau           ###   ########.fr       */
+/*   Updated: 2020/02/17 09:22:11 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	pf_do_conversion(int c, va_list *ap, t_printf *var)
 	{'c', 's','p', 'd', 'i', 'x', 'X', 'u', '\0'};
 
 	if (c == '%')
-		return (write(1, &c, 1));
+		return (pf_putchar(c));
 	count = 0;
 	if ((i = ft_strchr_index(conversions, c)) != -1)
 		count = fptr[i](ap, var);
@@ -33,7 +33,7 @@ static int	pf_do_conversion(int c, va_list *ap, t_printf *var)
 static int	pf_parse_fmt(const char *str, va_list *ap)
 {
 	char		*found;
-	t_printf	list;
+	t_printf	var;
 	int		count;
 
 	count = 0;
@@ -41,16 +41,16 @@ static int	pf_parse_fmt(const char *str, va_list *ap)
 	{
 		if ((found = ft_strchr(str, '%')) == NULL)
 		{
-			count += write(1, str, ft_strlen(str));
+			count += pf_putstrn(str, ft_strlen(str));
 			break;
 		}
 		else
 		{
-			count += write(1, str, found - str);
+			count += pf_putstrn(str, found - str);
 			str = found;
 			str++;
-			str += pf_get_optionals(str, ap, &list);
-			count += pf_do_conversion(*str, ap, &list); 
+			str += pf_get_optionals(str, ap, &var);
+			count += pf_do_conversion(*str, ap, &var); 
 		}
 		if (*str)
 			str++;
