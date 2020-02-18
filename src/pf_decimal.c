@@ -6,7 +6,7 @@
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 05:38:55 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/17 16:58:00 by gbudau           ###   ########.fr       */
+/*   Updated: 2020/02/18 11:47:46 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,7 @@ static int	print_number(int n)
 	char		buffer[12];
 
 	i = 0;
-	if (n < 0)
-		u = n * -1;
-	else
-		u = n;
+	u = n < 0 ? -n : n;
 	while(u)
 	{
 		buffer[i++] = u % 10 + '0';
