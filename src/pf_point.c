@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/16 06:29:54 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/18 20:32:10 by gbudau           ###   ########.fr       */
+/*   Created: 2020/02/16 16:29:54 by gbudau            #+#    #+#             */
+/*   Updated: 2020/02/19 11:53:33 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,9 @@ static int	pf_null_pointer(long n, t_printf *l)
 	return (n);
 }
 
-int		pf_point(va_list *ap, t_printf *l)
+int		pf_point(va_list *ap, t_printf *l, int count)
 {
 	long		n;
-	int		count;
 	int		len;
 	char		buffer[15];
 	

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/13 05:58:10 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/17 09:25:13 by gbudau           ###   ########.fr       */
+/*   Created: 2020/02/13 15:58:10 by gbudau            #+#    #+#             */
+/*   Updated: 2020/02/19 12:00:54 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,12 @@
 static int	pf_get_flags(const char *str, t_printf *var)
 {
 	int			i;
-	static const char	flags[3] = {'0', '-', '\0'};
-	char			*found;
+	int			n;
 
 	i = 0;
-	while ((found = ft_strchr(flags, str[i])) != NULL)
+	while ((n = ft_strchr_index(PF_FLAGS, str[i])) != -1)
 	{
-		var->flags |= 1 << (found - flags);
+		var->flags |= 1 << n;
 		i++;
 	}
 	return (i);

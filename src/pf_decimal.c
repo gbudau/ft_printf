@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/13 05:38:55 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/18 11:47:46 by gbudau           ###   ########.fr       */
+/*   Created: 2020/02/13 15:38:55 by gbudau            #+#    #+#             */
+/*   Updated: 2020/02/19 11:52:40 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,9 +102,8 @@ static int	print_normal(int n, int len, t_printf *v)
 	return (i);
 }
 
-int		pf_decimal(va_list *ap, t_printf *v)
+int		pf_decimal(va_list *ap, t_printf *v, int n)
 {
-	int		n;
 	int		i;
 	int		len;
 

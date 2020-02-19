@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/16 04:01:48 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/17 09:01:33 by gbudau           ###   ########.fr       */
+/*   Created: 2020/02/16 14:01:48 by gbudau            #+#    #+#             */
+/*   Updated: 2020/02/19 11:54:03 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,9 @@ static int	uint_len(unsigned int n)
 	return (i);
 }
 
-int		pf_uint(va_list *ap, t_printf *s)
+int		pf_uint(va_list *ap, t_printf *s, int out)
 {
 	unsigned int	n;
-	int		out;
 	int		len;
 
 	n = va_arg(*ap, unsigned int);

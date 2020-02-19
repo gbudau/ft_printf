@@ -5,16 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/13 02:08:11 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/17 09:25:22 by gbudau           ###   ########.fr       */
+/*   Created: 2020/02/13 12:08:11 by gbudau            #+#    #+#             */
+/*   Updated: 2020/02/19 11:53:51 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-int	pf_string(va_list *ap, t_printf *var)
+int	pf_string(va_list *ap, t_printf *var, int count)
 {
-	int	count;
 	int	len;
 	char	*str;
 

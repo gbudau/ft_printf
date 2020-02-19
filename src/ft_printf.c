@@ -5,28 +5,26 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/09 01:29:41 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/17 12:55:07 by gbudau           ###   ########.fr       */
+/*   Created: 2020/02/09 11:29:41 by gbudau            #+#    #+#             */
+/*   Updated: 2020/02/19 11:56:37 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-static int	pf_do_conversion(int c, va_list *ap, t_printf *var)
+static int	pf_do_conversion(va_list *ap, t_printf *var, int c)
 {
 	int			count;
 	int			i;
-	static int		(*fptr[8])(va_list *, t_printf *) = 
+	static int		(*fptr[8])(va_list *, t_printf *, int c) = 
 	{pf_char, pf_string, pf_point, pf_decimal, pf_decimal, pf_hex, 
-	pf_hex_upper, pf_uint};
-	static const char	conversions[9] = 
-	{'c', 's','p', 'd', 'i', 'x', 'X', 'u', '\0'};
+	pf_hex, pf_uint};
 
 	if (c == '%')
 		return (pf_putchar(c));
 	count = 0;
-	if ((i = ft_strchr_index(conversions, c)) != -1)
-		count = fptr[i](ap, var);
+	if ((i = ft_strchr_index(CONVERSIONS, c)) != -1)
+		count = fptr[i](ap, var, c);
 	return (count);
 }
 
@@ -40,14 +38,14 @@ static int	pf_parse_fmt(const char *str, va_list *ap)
 	while (*str)
 	{
 		if ((found = ft_strchr(str, '%')) == NULL)
-		{
-			count += pf_putstrn(str, ft_strlen(str));
-			break;
-		}
+			return (count += pf_putstrn(str, ft_strlen(str)));
 		count += pf_putstrn(str, found - str);
 		str = ++found;
-		str += pf_get_optionals(str, ap, &var);
-		count += pf_do_conversion(*str, ap, &var); 
+		if (*str)
+		{
+			str += pf_get_optionals(str, ap, &var);
+			count += pf_do_conversion(ap, &var, *str); 
+		}
 		if (*str)
 			str++;
 	}
