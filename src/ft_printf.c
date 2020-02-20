@@ -6,48 +6,46 @@
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/09 11:29:41 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/19 11:56:37 by gbudau           ###   ########.fr       */
+/*   Updated: 2020/02/20 12:33:16 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-static int	pf_do_conversion(va_list *ap, t_printf *var, int c)
+static int	do_conversion(va_list *ap, t_printf *s, int c)
 {
 	int			count;
 	int			i;
-	static int		(*fptr[8])(va_list *, t_printf *, int c) = 
+	static int		(*fptr[9])(va_list *, t_printf *, int c) = 
 	{pf_char, pf_string, pf_point, pf_decimal, pf_decimal, pf_hex, 
-	pf_hex, pf_uint};
+	pf_hex, pf_uint, pf_percent};
 
-	if (c == '%')
-		return (pf_putchar(c));
 	count = 0;
 	if ((i = ft_strchr_index(CONVERSIONS, c)) != -1)
-		count = fptr[i](ap, var, c);
+		count = fptr[i](ap, s, c);
 	return (count);
 }
 
-static int	pf_parse_fmt(const char *str, va_list *ap)
+static int	pf_parse_fmt(const char *fmt, va_list *ap)
 {
 	char		*found;
-	t_printf	var;
+	t_printf	s;
 	int		count;
 
 	count = 0;
-	while (*str)
+	while (*fmt)
 	{
-		if ((found = ft_strchr(str, '%')) == NULL)
-			return (count += pf_putstrn(str, ft_strlen(str)));
-		count += pf_putstrn(str, found - str);
-		str = ++found;
-		if (*str)
+		if ((found = ft_strchr(fmt, '%')) == NULL)
+			return (count += pf_putstrn(fmt, ft_strlen(fmt)));
+		count += pf_putstrn(fmt, found - fmt);
+		fmt = ++found;
+		if (*fmt)
 		{
-			str += pf_get_optionals(str, ap, &var);
-			count += pf_do_conversion(ap, &var, *str); 
+			fmt += pf_get_optionals(fmt, ap, &s);
+			count += do_conversion(ap, &s, *fmt);
 		}
-		if (*str)
-			str++;
+		if (*fmt)
+			fmt++;
 	}
 	return (count);
 }

@@ -6,7 +6,7 @@
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 15:38:55 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/20 11:46:50 by gbudau           ###   ########.fr       */
+/*   Updated: 2020/02/20 12:45:17 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	print_minus_first(char *buffer, int len, t_printf *s)
 	int	total_precision;
 
 	total_precision = s->prec >= len ? s->prec + 1 : len;
-	if (s->flags & F_MINUS)
+	if (s->flags & F_LEFT)
 	{
 		count = minus_zero_n(len, buffer, s->prec - len + 1);
 		count += pf_put_space(s->width - total_precision);
@@ -49,7 +49,7 @@ static int	print_normal(char *buffer, int len, t_printf *s)
 	int	total_precision;
 
 	total_precision = s->prec > len ? s->prec : len;
-	if (s->flags & F_MINUS)
+	if (s->flags & F_LEFT)
 	{
 		count = pf_put_zero(s->prec - len);
 		count += pf_putstrn(buffer, len);

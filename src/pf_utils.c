@@ -6,7 +6,7 @@
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 15:45:49 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/19 11:54:15 by gbudau           ###   ########.fr       */
+/*   Updated: 2020/02/20 13:05:03 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ size_t	pf_putchar(char c)
 	return (1);
 }
 
-size_t	pf_putstrn(const char *s, int len)
+size_t	pf_putstrn(const char *str, int len)
 {
-	write(1, s, len);
+	write(1, str, len);
 	return (len);
 }
 

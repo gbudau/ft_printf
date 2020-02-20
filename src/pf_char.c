@@ -6,25 +6,25 @@
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 12:38:18 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/19 11:52:17 by gbudau           ###   ########.fr       */
+/*   Updated: 2020/02/20 12:45:16 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-int	pf_char(va_list *ap, t_printf *var, int count)
+int	pf_char(va_list *ap, t_printf *s, int count)
 {
 	unsigned char	c;
 
 	c = va_arg(*ap, int);
-	if (var->flags & F_MINUS)
+	if (s->flags & F_LEFT)
 	{
 		pf_putchar(c);
-		count = pf_put_space(var->width - 1);
+		count = pf_put_space(s->width - 1);
 	}
 	else
 	{
-		count = pf_put_space(var->width - 1);
+		count = pf_put_space(s->width - 1);
 		pf_putchar(c);
 	}
 	return (count + 1);
