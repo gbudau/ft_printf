@@ -6,116 +6,79 @@
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 15:38:55 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/19 11:52:40 by gbudau           ###   ########.fr       */
+/*   Updated: 2020/02/20 11:46:50 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-static int	print_number(int n)
+static int	minus_zero_n(int len, char *buffer, int zero)
 {
-	unsigned	u;
-	int		i;
-	char		buffer[12];
+	int	count;
 
-	i = 0;
-	u = n < 0 ? -n : n;
-	while(u)
-	{
-		buffer[i++] = u % 10 + '0';
-		u /= 10;
-	}
-	if (i == 0)
-		buffer[i++] = '0';
-	if (n < 0)
-		buffer[i++] = '-';
-	buffer[i] = '\0';
-	ft_strnrevn(buffer, 0, i - 1);
-	pf_putstrn(buffer, i);
-	return (i);
+	count = pf_putchar(buffer[0]);
+	count += pf_put_zero(zero);
+	count += pf_putstrn(&buffer[1], len - 1);
+	return (count);
 }
 
-static int	print_unsigned(unsigned n)
+static int	print_minus_first(char *buffer, int len, t_printf *s)
 {
-	char		buffer[12];
-	int		i;
+	int	count;
+	int	total_precision;
 
-	i = 0;
-	while (n)
+	total_precision = s->prec >= len ? s->prec + 1 : len;
+	if (s->flags & F_MINUS)
 	{
-		buffer[i++] = n % 10 + '0';
-		n /= 10;
+		count = minus_zero_n(len, buffer, s->prec - len + 1);
+		count += pf_put_space(s->width - total_precision);
 	}
-	if (i == 0)
-		buffer[i++] = '0';
-	buffer[i] = '\0';
-	ft_strnrevn(buffer, 0, i - 1);
-	pf_putstrn(buffer, i);
-	return (i);
-}
-
-static int	minus_zero_n(int n, int len)
-{
-	int	i;
-
-	i = pf_putchar('-');
-	i += pf_put_zero(len);
-	i += print_unsigned(-n);
-	return (i);
-}
-
-static int	print_minus_first(int n, int len, t_printf *v)
-{
-	int	i;
-
-	if (v->flags & F_MINUS)
+	else if (s->prec >= 0)
 	{
-		i = minus_zero_n(n, v->prec >= len ? v->prec - len + 1 : 0);
-		i += pf_put_space(v->width - (v->prec >= len ? v->prec + 1 : len));
-	}
-	else if (v->prec >= 0)
-	{
-		i = pf_put_space(v->width - (v->prec >=  len ? v->prec + 1 : len));
-		i += minus_zero_n(n, v->prec - len + 1);
+		count = pf_put_space(s->width - total_precision);
+		count += minus_zero_n(len, buffer, s->prec - len + 1);
 	}
 	else
-		i = minus_zero_n(n, v->width - len);
-	return (i);
+		count = minus_zero_n(len, buffer, s->width - len);
+	return (count);
 }
 
-static int	print_normal(int n, int len, t_printf *v)
+static int	print_normal(char *buffer, int len, t_printf *s)
 {
-	int	i;
+	int	count;
+	int	total_precision;
 
-	if (v->flags & F_MINUS)
+	total_precision = s->prec > len ? s->prec : len;
+	if (s->flags & F_MINUS)
 	{
-		i = pf_put_zero(v->prec - len);
-		i += n < 0 ? print_number(n) : print_unsigned(n);
-		i += pf_put_space(v->width - (v->prec > len ? v->prec : len));
+		count = pf_put_zero(s->prec - len);
+		count += pf_putstrn(buffer, len);
+		count += pf_put_space(s->width - total_precision);
 	}
 	else
 	{
-		i = pf_put_zero_or_space(v, v->width - (v->prec > len ? v->prec : len));
-		i += pf_put_zero(v->prec - len);
-		i += n < 0 ? print_number(n) : print_unsigned(n);
+		count = pf_put_zero_or_space(s, s->width - total_precision);
+		count += pf_put_zero(s->prec - len);
+		count += pf_putstrn(buffer, len);
 	}
-	return (i);
+	return (count);
 }
 
-int		pf_decimal(va_list *ap, t_printf *v, int n)
+int		pf_decimal(va_list *ap, t_printf *s, int n)
 {
-	int		i;
+	int		count;
 	int		len;
+	char		buffer[12];
 
 	n = va_arg(*ap, int);
-	if (v->prec == 0 && n == 0)
-		return (pf_put_space(v->width));
-	len = ft_intlen(n);
-	if (v->width < len && v->prec < len)
-		return (print_number(n));
-	if (n < 0 && (v->prec >= len || (v->width > len && v->flags & F_ZERO)))
-		i = print_minus_first(n, len, v);
+	if (s->prec == 0 && n == 0)
+		return (pf_put_space(s->width));
+	len = pf_ltoa_base_len(n, buffer, 10, 0);
+	if (s->width < len && s->prec < len)
+		return (pf_putstrn(buffer, len));
+	if (n < 0 && (s->prec >= len || (s->width > len && s->flags & F_ZERO)))
+		count = print_minus_first(buffer, len, s);
 	else
-		i = print_normal(n, len, v);
-	return (i);
+		count = print_normal(buffer, len, s);
+	return (count);
 }
