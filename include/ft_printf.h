@@ -6,7 +6,7 @@
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/09 11:29:47 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/20 13:11:06 by gbudau           ###   ########.fr       */
+/*   Updated: 2020/02/21 11:04:44 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,13 @@
 # include <unistd.h>
 # include <stdarg.h>
 # include "../libft/libft.h"
-# define F_ZERO 1
-# define F_LEFT 2
+# define PF_FLAG_ZERO 1
+# define PF_FLAG_LEFT 2
 # define PF_FLAGS "0-"
-# define CONVERSIONS "cspdixXu%"
+# define PF_CONVERSIONS "cspdixXu%n"
+# define PF_SPACE_FILL "        "
+# define PF_ZERO_FILL "00000000"
+# define PF_FILL_SIZE 8
 
 typedef struct s_pf
 {
@@ -35,6 +38,7 @@ int	pf_decimal(va_list *ap, t_printf *s, int count);
 int	pf_hex(va_list *ap, t_printf *s, int letter);
 int	pf_uint(va_list *ap, t_printf *s, int count);
 int	pf_percent(va_list *ap, t_printf *s, int count);
+int	pf_count_n(va_list *ap, t_printf *s, int count);
 int	pf_get_optionals(const char *fmt, va_list *ap, t_printf *s);
 int	pf_ltoa_base_len(long n, char *buffer, int base, int ch);
 int	pf_ultoa_base_len(unsigned long u, char *buffer, int base, int ch);

@@ -6,7 +6,7 @@
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 12:38:18 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/20 12:45:16 by gbudau           ###   ########.fr       */
+/*   Updated: 2020/02/21 11:03:35 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	pf_char(va_list *ap, t_printf *s, int count)
 	unsigned char	c;
 
 	c = va_arg(*ap, int);
-	if (s->flags & F_LEFT)
+	if (s->flags & PF_FLAG_LEFT)
 	{
 		pf_putchar(c);
 		count = pf_put_space(s->width - 1);

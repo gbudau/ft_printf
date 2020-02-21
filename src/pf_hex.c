@@ -6,7 +6,7 @@
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 17:32:19 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/20 13:01:33 by gbudau           ###   ########.fr       */
+/*   Updated: 2020/02/21 11:03:36 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		pf_hex(va_list *ap, t_printf *s, int c)
 	if (s->width < len && s->prec < len)
 		return (pf_putstrn(buffer, len));
 	c = s->prec > len ? s->prec : len;
-	if (s->flags & F_LEFT)
+	if (s->flags & PF_FLAG_LEFT)
 	{
 		count = pf_put_zero(s->prec - len);
 		count += pf_putstrn(buffer, len);

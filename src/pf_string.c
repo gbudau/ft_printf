@@ -6,7 +6,7 @@
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 12:08:11 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/20 13:04:03 by gbudau           ###   ########.fr       */
+/*   Updated: 2020/02/21 11:03:37 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	pf_string(va_list *ap, t_printf *s, int count)
 		len = s->prec;
 	if (s->width < len)
 		return (count = pf_putstrn(str, len));
-	if (s->flags & F_LEFT)
+	if (s->flags & PF_FLAG_LEFT)
 	{
 		count = pf_putstrn(str, len);
 		count += pf_put_space(s->width - len);

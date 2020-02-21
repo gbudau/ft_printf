@@ -6,7 +6,7 @@
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 16:29:54 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/20 13:03:36 by gbudau           ###   ########.fr       */
+/*   Updated: 2020/02/21 11:03:36 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	pf_null_pointer(long n, t_printf *s)
 {
-	if (s->flags & F_LEFT)
+	if (s->flags & PF_FLAG_LEFT)
 	{
 		n = pf_putstrn("(nil)", 5);
 		n += pf_put_space(s->width - 5);
@@ -37,7 +37,7 @@ int		pf_point(va_list *ap, t_printf *s, int count)
 	if (n == 0)
 		return (n += pf_null_pointer(n, s));
 	len = pf_ultoa_base_len(n, buffer, 16, count);
-	if (s->flags & F_LEFT)
+	if (s->flags & PF_FLAG_LEFT)
 	{
 		count = pf_putstrn(buffer, len);
 		count += pf_put_space(s->width - len);

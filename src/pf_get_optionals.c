@@ -6,7 +6,7 @@
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 15:58:10 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/20 12:49:11 by gbudau           ###   ########.fr       */
+/*   Updated: 2020/02/21 11:03:36 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	pf_get_width(const char *fmt, va_list *ap, t_printf *s)
 		s->width = va_arg(*ap, int);
 		if (s->width < 0)
 		{
-			s->flags |= F_LEFT;
+			s->flags |= PF_FLAG_LEFT;
 			s->width *= -1;
 		}
 		i++;

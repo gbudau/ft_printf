@@ -6,7 +6,7 @@
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 14:01:48 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/20 13:04:37 by gbudau           ###   ########.fr       */
+/*   Updated: 2020/02/21 11:03:37 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		pf_uint(va_list *ap, t_printf *s, int count)
 	if (s->prec < len && s->width < len)
 		return (pf_putstrn(buffer, len));
 	total_precision = s->prec < len ? len : s->prec;
-	if (s->flags & F_LEFT)
+	if (s->flags & PF_FLAG_LEFT)
 	{
 		count = pf_put_zero(s->prec - len);
 		count += pf_putstrn(buffer, len);
