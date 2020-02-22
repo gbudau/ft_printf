@@ -6,7 +6,7 @@
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 11:52:41 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/22 09:30:12 by gbudau           ###   ########.fr       */
+/*   Updated: 2020/02/22 10:45:12 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	pf_percent(va_list *ap, t_printf *s, int count)
 	}
 	else
 	{
-		count = pf_put_space(s->width - 1);
+		count = pf_put_zero_or_space(s, s->width - 1);
 		pf_putchar('%');
 	}
 	return (count + 1);

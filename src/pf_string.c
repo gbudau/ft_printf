@@ -6,7 +6,7 @@
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 12:08:11 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/22 09:07:12 by gbudau           ###   ########.fr       */
+/*   Updated: 2020/02/22 10:35:23 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	pf_string(va_list *ap, t_printf *s, int count)
 
 	str = va_arg(*ap, char *);
 	if (!str)
-		str = (s->prec < 6 && s->prec > 0) ? "" : "(null)";
+		str = "(null)";
 	len = ft_strlen(str);
 	if (s->prec >= 0 && s->prec < len)
 		len = s->prec;
