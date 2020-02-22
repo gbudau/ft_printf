@@ -6,7 +6,7 @@
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 16:29:54 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/22 11:10:12 by gbudau           ###   ########.fr       */
+/*   Updated: 2020/02/22 12:49:48 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	pointer_special_case(t_printf *s)
 	if (s->flags & PF_FLAG_LEFT)
 	{
 		count = pf_putstrn("0x", 2);
-		count += pf_put_space(s->width -2);
+		count += pf_put_space(s->width - 2);
 	}
 	else
 	{
