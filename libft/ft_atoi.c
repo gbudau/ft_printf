@@ -6,7 +6,7 @@
 /*   By: gbudau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/10 02:04:46 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/11 08:19:18 by gbudau           ###   ########.fr       */
+/*   Updated: 2020/02/22 08:52:02 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	ft_atoi(const char *s)
 {
-	unsigned int					nbr;
-	int						pon;
+	unsigned int	nbr;
+	int				pon;
 
 	while (ft_isspace(*s))
 		s++;

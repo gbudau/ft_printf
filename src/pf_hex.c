@@ -6,7 +6,7 @@
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 17:32:19 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/21 11:03:36 by gbudau           ###   ########.fr       */
+/*   Updated: 2020/02/22 09:00:55 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 int		pf_hex(va_list *ap, t_printf *s, int c)
 {
 	unsigned int	n;
-	int		len;
-	int		count;
-	char		buffer[9];
+	int				len;
+	int				count;
+	char			buffer[9];
 
 	n = va_arg(*ap, int);
 	if (s->prec == 0 && n == 0)

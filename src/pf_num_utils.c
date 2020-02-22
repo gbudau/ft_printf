@@ -6,7 +6,7 @@
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 11:53:18 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/19 13:58:13 by gbudau           ###   ########.fr       */
+/*   Updated: 2020/02/22 09:06:37 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int	pf_ltoa_base_len(long n, char *buffer, int base, int c)
 {
-	int			i;
+	int				i;
 	long			rest;
-	unsigned long		u;
-	
+	unsigned long	u;
+
 	i = 0;
 	c = c == 'X' ? 'A' : 'a';
 	u = n < 0 ? -n : n;
@@ -41,9 +41,9 @@ int	pf_ltoa_base_len(long n, char *buffer, int base, int c)
 
 int	pf_ultoa_base_len(unsigned long u, char *buffer, int base, int c)
 {
-	unsigned long 		rest;
-	int			i;
-	int			hex;
+	unsigned long	rest;
+	int				i;
+	int				hex;
 
 	i = 0;
 	hex = (c == 'X') ? 'A' : 'a';

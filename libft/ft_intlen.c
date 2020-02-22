@@ -6,7 +6,7 @@
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 08:55:29 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/10 08:56:05 by gbudau           ###   ########.fr       */
+/*   Updated: 2020/02/22 08:52:59 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 size_t	ft_intlen(int nb)
 {
-	size_t		i;
+	size_t			i;
 	unsigned int	n;
 
 	i = 0;

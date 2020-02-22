@@ -6,7 +6,7 @@
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 15:38:55 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/21 11:04:31 by gbudau           ###   ########.fr       */
+/*   Updated: 2020/02/22 09:10:44 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,11 @@ static int	print_normal(char *buffer, int len, t_printf *s)
 	return (count);
 }
 
-int		pf_decimal(va_list *ap, t_printf *s, int n)
+int			pf_decimal(va_list *ap, t_printf *s, int n)
 {
 	int		count;
 	int		len;
-	char		buffer[12];
+	char	buffer[12];
 
 	n = va_arg(*ap, int);
 	if (s->prec == 0 && n == 0)
@@ -76,7 +76,8 @@ int		pf_decimal(va_list *ap, t_printf *s, int n)
 	len = pf_ltoa_base_len(n, buffer, 10, 0);
 	if (s->width < len && s->prec < len)
 		return (pf_putstrn(buffer, len));
-	if (n < 0 && (s->prec >= len || (s->width > len && s->flags & PF_FLAG_ZERO)))
+	if (n < 0 && (s->prec >= len ||
+				(s->width > len && s->flags & PF_FLAG_ZERO)))
 		count = print_minus_first(buffer, len, s);
 	else
 		count = print_normal(buffer, len, s);

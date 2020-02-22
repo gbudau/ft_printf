@@ -6,7 +6,7 @@
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/09 11:29:41 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/21 11:01:36 by gbudau           ###   ########.fr       */
+/*   Updated: 2020/02/22 09:07:59 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 static int	do_conversion(va_list *ap, t_printf *s, int c, int len)
 {
-	int			count;
-	int			i;
-	static int		(*fptr[10])(va_list *, t_printf *, int c) = 
-	{pf_char, pf_string, pf_point, pf_decimal, pf_decimal, pf_hex, 
+	int				count;
+	int				i;
+	static int		(*fptr[10])(va_list *, t_printf *, int c) =
+	{pf_char, pf_string, pf_point, pf_decimal, pf_decimal, pf_hex,
 	pf_hex, pf_uint, pf_percent, pf_count_n};
 
 	count = 0;
@@ -34,7 +34,7 @@ static int	pf_parse_fmt(const char *fmt, va_list *ap)
 {
 	char		*found;
 	t_printf	s;
-	int		count;
+	int			count;
 
 	count = 0;
 	while (*fmt)
@@ -54,10 +54,10 @@ static int	pf_parse_fmt(const char *fmt, va_list *ap)
 	return (count);
 }
 
-int		ft_printf(const char *fmt, ...)
+int			ft_printf(const char *fmt, ...)
 {
 	va_list	ap;
-	int	count;
+	int		count;
 
 	va_start(ap, fmt);
 	count = pf_parse_fmt(fmt, &ap);

@@ -6,7 +6,7 @@
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 15:58:10 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/21 11:03:36 by gbudau           ###   ########.fr       */
+/*   Updated: 2020/02/22 09:09:21 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,10 @@ static int	pf_get_width(const char *fmt, va_list *ap, t_printf *s)
 	return (i);
 }
 
-static int	pf_get_prec(const char *fmt,va_list *ap, t_printf *s)
+static int	pf_get_prec(const char *fmt, va_list *ap, t_printf *s)
 {
 	int	i;
-	
+
 	i = 0;
 	s->prec = -1;
 	if (fmt[i++] != '.')
@@ -75,16 +75,16 @@ static int	pf_get_prec(const char *fmt,va_list *ap, t_printf *s)
 		}
 	}
 	return (i);
-}	
+}
 
-int		pf_get_optionals(const char *fmt, va_list *ap, t_printf *s)
+int			pf_get_optionals(const char *fmt, va_list *ap, t_printf *s)
 {
-	static t_printf	zero;
-	int		i;
+	static t_printf		zero;
+	int					i;
 
 	*s = zero;
 	i = pf_get_flags(fmt, s);
-	i += pf_get_width(&fmt[i], ap, s);	
+	i += pf_get_width(&fmt[i], ap, s);
 	i += pf_get_prec(&fmt[i], ap, s);
 	return (i);
 }

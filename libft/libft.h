@@ -6,7 +6,7 @@
 /*   By: gbudau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/10 21:34:03 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/18 19:58:30 by gbudau           ###   ########.fr       */
+/*   Updated: 2020/02/22 08:58:24 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ t_list				*ft_lstmap(t_list *lst, void *(*f)(void *)
 */
 
 char				*ft_strndup(const char *s1, size_t n);
-int				ft_strchr_index(const char *str, int c);
+int					ft_strchr_index(const char *str, int c);
 void				ft_putchar(char c);
 void				ft_putnbr(int nb);
 void				ft_strrev(char *str);

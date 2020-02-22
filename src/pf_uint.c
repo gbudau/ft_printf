@@ -6,7 +6,7 @@
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 14:01:48 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/21 11:03:37 by gbudau           ###   ########.fr       */
+/*   Updated: 2020/02/22 09:11:22 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 int		pf_uint(va_list *ap, t_printf *s, int count)
 {
 	unsigned int	n;
-	int		len;
-	char		buffer[11];
-	int		total_precision;
+	int				len;
+	char			buffer[11];
+	int				total_precision;
 
 	n = va_arg(*ap, int);
 	if (s->prec == 0 && n == 0)

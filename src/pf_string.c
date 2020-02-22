@@ -6,7 +6,7 @@
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 12:08:11 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/21 11:03:37 by gbudau           ###   ########.fr       */
+/*   Updated: 2020/02/22 09:07:12 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	pf_string(va_list *ap, t_printf *s, int count)
 {
-	int	len;
+	int		len;
 	char	*str;
 
 	str = va_arg(*ap, char *);
