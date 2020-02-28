@@ -6,7 +6,7 @@
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 19:49:44 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/18 20:02:44 by gbudau           ###   ########.fr       */
+/*   Updated: 2020/02/28 16:04:33 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 char	*ft_strcpy(char *dest, const char *src)
 {
-	size_t	i;
+	char	*tmp;
 
-	i = -1;
-	while (src[++i])
-		dest[i] = src[i];
+	tmp = dest;
+	while (*src)
+		*tmp++ = *src++;
+	*tmp = '\0';
 	return (dest);
 }

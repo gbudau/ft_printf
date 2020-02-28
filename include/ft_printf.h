@@ -6,7 +6,7 @@
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/09 11:29:47 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/22 08:51:11 by gbudau           ###   ########.fr       */
+/*   Updated: 2020/02/28 14:55:23 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ int					pf_percent(va_list *ap, t_printf *s, int count);
 int					pf_count_n(va_list *ap, t_printf *s, int count);
 int					pf_get_optionals(const char *fmt, va_list *ap, t_printf *s);
 int					pf_ltoa_base_len(long n, char *buffer, int base, int ch);
-int					pf_ultoa_base_len(unsigned long u,
-					char *buffer, int base, int ch);
 int					pf_put_zero(int len);
 int					pf_put_space(int len);
 int					pf_put_zero_or_space(t_printf *s, int len);

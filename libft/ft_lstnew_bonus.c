@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 17:23:48 by gbudau            #+#    #+#             */
-/*   Updated: 2019/11/28 20:48:47 by gbudau           ###   ########.fr       */
+/*   Updated: 2020/02/28 15:54:32 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,7 @@ t_list	*ft_lstnew(void *content)
 
 	if (!(new = malloc(sizeof(t_list))))
 		return (NULL);
-	if (content != NULL)
-		new->content = content;
-	else
-		new->content = NULL;
+	new->content = content;
 	new->next = NULL;
 	return (new);
 }

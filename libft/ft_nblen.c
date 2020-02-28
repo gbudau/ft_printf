@@ -6,31 +6,27 @@
 /*   By: gbudau <gbudau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 08:55:29 by gbudau            #+#    #+#             */
-/*   Updated: 2020/02/22 08:52:59 by gbudau           ###   ########.fr       */
+/*   Updated: 2020/02/28 15:12:55 by gbudau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_intlen(int nb)
+size_t	ft_nblen(long nb)
 {
 	size_t			i;
-	unsigned int	n;
+	unsigned long	n;
 
 	i = 0;
-	if (nb == 0)
-		return (1);
-	if (nb < 0 && i == 0)
-	{
-		n = nb * -1;
-		i++;
-	}
-	else
-		n = nb;
-	while (n > 0)
+	n = nb < 0 ? -nb : nb;
+	while (n)
 	{
 		n /= 10;
 		i++;
 	}
+	if (!i)
+		return (1);
+	if (nb < 0)
+		i++;
 	return (i);
 }
